@@ -1,0 +1,20 @@
+async function main(){
+
+console.log('a');
+console.log('b');
+const promise1=await new Promise((resolve,reject)=>{
+  setTimeout(()=>{resolve('c')},1000)
+
+})
+console.log(promise1);
+  
+
+const promise2=await new Promise((resolve,reject)=>{setTimeout(()=>{resolve('d')},0)
+
+})
+console.log(promise2);
+
+console.log('e');
+
+}
+main();

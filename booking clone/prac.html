@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+let myPromise = new Promise(function(resolve,reject){
+
+var x=101;
+
+if(x==10){
+
+  resolve("x value is ten")
+
+}else{
+
+  reject('Error: value is not ten')
+
+}
+
+})
+
+myPromise.then(function(a){
+
+console.log(a)
+
+})
+.catch(function (er) {
+
+    console.log(er)
+
+});
+
+
+    </script>
+</body>
+</html>

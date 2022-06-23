@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="expense(event)">
+
+        <label>choose expenseamount:</label>
+        <input type="number" name="amount">
+
+        <label>description</label>
+        <input type="text" name="desc">
+
+        <label>choose a category</label>
+        <select id="category" name="category">
+            <option>Movie</option>
+            <option>food</option>
+            <option>travel</option>
+            <option>snacks</option>
+            <option>hotel</option>
+
+        </select>
+
+        <button>Add expense</button>
+
+    </form>
+    <ul id="li"></ul>
+
+    <script>
+
+function expense(event){
+        event.preventDefault();
+
+    const amount=event.target.amount.value;
+    const description=event.target.desc.value;
+    const category=event.target.category.value;
+
+    const obj={
+        amount,
+        description,
+        category
+    }
+
+    localStorage.setItem(obj.description , JSON.stringify(obj));
+    showexpense(obj);
+    
+}
+function showexpense(show){
+    if(localStorage.getItem(show.description) !==null){
+
+        deleteexpense(show.description);
+     }
+    parentnode=document.getElementById("li");
+    childnode=`<li id="${show.description}"> ${show.amount} - ${show.description} - ${show.category}
+        <button onclick="deletebtn('${show.description}')">delete</button> </li>`;
+
+    parentnode.innerHTML=parentnode.innerHTML + childnode;
+}
+
+function deletebtn(description){
+    
+localStorage.removeItem(description);
+deleteexpense(description);
+
+}
+
+function deleteexpense(description){
+    parentnode=document.getElementById('li');
+    childnode=document.getElementById(description);
+
+    if(childnode){
+    parentnode.removeChild(childnode);
+}
+}
+    </script>
+</body>
+</html>

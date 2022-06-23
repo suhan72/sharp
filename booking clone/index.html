@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+<form onsubmit="storage(event)">
+
+    <label>name</label>
+    <input type="text" name="username" id="name" />
+
+    <label>email</label>
+    <input type="email" name="emailid" id="email" />
+
+    <label>number</label>
+    <input type="tel" name="phonenumber" id="number" />
+
+    <button>Submit</button>
+
+</form>
+
+<ul id="li"></ul>
+
+
+<script>
+
+
+
+function storage(event){
+    event.preventDefault();
+
+    let name=event.target.username.value;
+    let email=event.target.emailid.value;
+    let phno=event.target.phonenumber.value;
+
+    let obj={
+        name,
+        email,
+        phno
+    }
+
+    
+    localStorage.setItem(obj.email,JSON.stringify(obj));
+    displayDetails(obj);
+
+}
+
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    Object.keys(localStorage).forEach(key => {
+         const show = JSON.parse(localStorage.getItem(key))
+        displayDetails(show)
+    })
+
+})
+
+
+function displayDetails(show){
+//dont print if same mail id
+  if(localStorage.getItem(show.email) !==null){
+  deleteuserinscreen(show.email)
+  }
+    let parentNode=document.getElementById('li');
+    let childNode=`<li id=${show.email}>${show.name} - ${show.email} - ${show.phno}
+                   <button onclick=deleteuser('${show.email}')>delete</button>
+    
+                   <button onclick=edituser('${show.email}','${show.name}','${show.phno}')>edit</button>
+                   
+                   </li>`;
+
+    parentNode.innerHTML=parentNode.innerHTML + childNode;
+}
+ 
+
+function edituser(email,name,phno){
+
+    document.getElementById('name').value=name;
+    document.getElementById('email').value=email;
+    document.getElementById('number').value=phno;
+
+    deleteuser(email)
+
+}
+
+
+function deleteuser(email){
+    //console.log(email);
+    localStorage.removeItem(email);
+    deleteuserinscreen(email);
+}
+
+
+
+function deleteuserinscreen(email){
+ let parentNode=document.getElementById('li');
+ let childNode=document.getElementById(email);
+
+ //dont print if same mail id
+if(childNode){
+
+ parentNode.removeChild(childNode);
+}
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

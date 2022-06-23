@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "..\\booking appointmenta"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "booking appointmenta"
+	}
+}
